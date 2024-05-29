@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <script defer src="scriptOOPS.js"></script>
+    <!--defer means js engine(fetches JS),browser(fetches HTML) work simultaneously to improve performance,once HTML is completely loaded,then JS execution starts.-->
+
+    <!--here leaflet was loaded first hence,script has access to global variables of leaflet.js-->
+
+    <title>MAPTY</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <img src="logo.png" alt="Logo" class="logo" />
+
+      <ul class="workouts">
+        <!--unordered list without any numbering-->
+        <form class="form hidden">
+          <!--form hidden at first,when clicked on map it appears-->
+
+          <!--there are 4 form__row classes(four inputs)-->
+          <div class="form__row">
+            <label class="form__label">Type</label>
+            <select class="form__input form__input--type">
+              <option value="running">Running</option>
+              <!--when running is selected value='running' will be passed to select clas=''-->
+              <option value="cycling">Cycling</option>
+            </select>
+          </div>
+          <div class="form__row">
+            <label class="form__label">Distance</label>
+            <input class="form__input form__input--distance" placeholder="km" />
+          </div>
+          <div class="form__row">
+            <label class="form__label">Duration</label>
+            <input
+              class="form__input form__input--duration"
+              placeholder="min"
+            />
+          </div>
+          <div class="form__row" data-index="0">
+            <label class="form__label">Cadence</label
+            ><!--this is for running--><!--should disappear for cycling-->
+            <input
+              class="form__input form__input--cadence"
+              placeholder="step/min"
+            />
+          </div>
+          <div class="form__row form__row--hidden" data-index="1">
+            <label class="form__label">Elev Gain</label
+            ><!--this is for cycling--><!--should disappear for running-->
+            <input
+              class="form__input form__input--elevation"
+              placeholder="meters"
+            />
+          </div>
+          <button class="form__btn">OK</button
+          ><!--'enter' key will do OK button's functionality-->
+        </form>
+
+        <!--workout schedule-->
+        <!--<li class="workout workout--running" data-id="1234567890">
+          <!--for running
+          <h2 class="workout__title">Running on April 14</h2>
+          <div class="workout__details">
+            <!--breif description about workout
+            <span class="workout__icon">🏃‍♂️</span>
+            <span class="workout__value">5.2</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">24</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">4.6</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">km/min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">🦶🏼</span>
+            <span class="workout__value">178</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">spm</span>
+          </div>
+        </li>
+
+        <li class="workout workout--cycling" data-id="1234567891">
+          <h2 class="workout__title">Cycling on April 5</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🚴‍♀️</span>
+            <span class="workout__value">27</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">95</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">16</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">km/h</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⛰</span>
+            <span class="workout__value">223</span
+            ><!--replace this hardcoded value with dynamic value
+            <span class="workout__unit">m</span>
+          </div>
+        </li>-->
+        <!--workout schedule(plans) ends here-->
+      </ul>
+
+      <p class="copyright">
+        &copy; Copyright by
+        <a
+          class="twitter-link"
+          target="_blank"
+          href="https://twitter.com/jonasschmedtman"
+          >Sunil</a
+        >. Use for learning or your portfolio. Don't use to teach. Don't claim
+        as your own.
+      </p>
+    </div>
+
+    <div id="map"></div>
+    <!--map is displayed in this div-->
+  </body>
+</html>
